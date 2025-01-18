@@ -3,10 +3,10 @@
     "version": "0.1.0",
     "manifest_version": 3,
     "action": {
-      "default_popup": "HTML/test.html",
+      "default_popup": "popup/test.html",
       "default_icon": "images/test.png"
     },
     "background":{
-        "service_worker": "js/background.js"
+        "service_worker": "background.js"
     }
 }
