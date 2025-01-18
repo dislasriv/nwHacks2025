@@ -1,11 +1,15 @@
 {
     "name":"AccountabilityBuddy (or something)",
+    "description":"A simple extension to save you from yourself.",
+
     "version": "0.1.0",
     "manifest_version": 3,
+
     "action": {
       "default_popup": "popup/test.html",
       "default_icon": "images/test.png"
     },
+
     "background":{
         "service_worker": "background.js"
     }
