@@ -6,15 +6,13 @@
     "manifest_version": 3,
 
     "action": {
-      "default_popup": "HTML/test.html",
-      "default_icon": "images/test.png"
+      "default_popup": "popup/test.html",
+      "default_icon": "popup/test.png"
     },
 
     "background":{
-        "service_worker": "js/background.js"
+        "service_worker": "background.js"
     },
 
-    "permissions" : [
-        "activeTab"
-    ]
+    "permissions" : [ "activeTab" ]
 }
