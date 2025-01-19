@@ -35,7 +35,7 @@ function AddRowToTable(domain, time) {
 
   // Create the timer limit column
   const timeCell = document.createElement("td");
-  timeCell.textContent = `${time} minutes`;
+  timeCell.textContent = `${time} mins`;
 
   // Append cells to the row
   row.appendChild(domainCell);

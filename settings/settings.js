@@ -52,7 +52,7 @@ function AddRowToTable(domain, time) {
     // Handle delete button click event
     deleteBtn.addEventListener('click', (event) => {
         const row = event.target.parentNode.parentNode;
-        const url = row.children[1].innerText;
+        const url = row.children[0].innerText;
         restrictedList = restrictedList.filter(({ domain, time }) => domain != url)
         chrome.storage.local.set({ restrictedList })
         row.parentNode.removeChild(row);
@@ -68,7 +68,7 @@ function AddRowToTable(domain, time) {
 
     // Create the timer limit column
     const timeCell = document.createElement("td");
-    timeCell.textContent = `${time} minutes`;
+    timeCell.textContent = `${time} mins`;
 
     // Append cells to the row
     row.appendChild(domainCell);
