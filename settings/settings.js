@@ -1,8 +1,9 @@
+
 // Set of restricted domains and their time limits
 let restrictedList = [];
 
 // Retrieve restricted list from chrome.storage.local
-chrome.storage.local.get(['restrictedList'], (result) => {
+chrome.storage.local.get(['restrictedList'], async(result) => {
     restrictedList = result.restrictedList || [];
     renderTable();  // Render the table after data is retrieved
 });
@@ -42,7 +43,6 @@ function unbanWebsite(event) {
 // Add a row entry to the table
 function AddRowToTable(domain, time) {
     const tbody = document.querySelector("#domain-list tbody");
-
     const row = document.createElement("tr");
 
     // Delete button

@@ -1,5 +1,8 @@
+
+
 //Fires when HTML has been completely loaded and parsed
 document.addEventListener('DOMContentLoaded', async () => {
+  
   //get websiteTimes OBJECT
   let result = await chrome.storage.local.get(['websiteTimes']);
   // assign result.webtimes OR an empty object if that is not defined
