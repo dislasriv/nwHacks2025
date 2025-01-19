@@ -32,7 +32,7 @@ function renderTable() {
 }
 
 // Unban a website
-function unbanWebsite(event) {
+function RemoveRestriction(event) {
     let row = event.target.parentNode;
     let url = row.children[1].innerText;
     restrictedList = restrictedList.filter(({ domain, time }) => domain != url)
@@ -48,7 +48,7 @@ function AddRowToTable(domain, time) {
     // Delete button
     const deleteButton = document.createElement("td")
     deleteButton.innerText = "x"
-    deleteButton.addEventListener('click', unbanWebsite)
+    deleteButton.addEventListener('click', RemoveRestriction)
 
     // Create the domain name column
     const domainCell = document.createElement("td");
