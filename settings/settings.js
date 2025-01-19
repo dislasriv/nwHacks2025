@@ -3,7 +3,7 @@
 let restrictedList = [];
 
 // Retrieve restricted list from chrome.storage.local
-chrome.storage.local.get(['restrictedList'], async(result) => {
+chrome.storage.local.get(['restrictedList'], async (result) => {
     restrictedList = result.restrictedList || [];
     renderTable();  // Render the table after data is retrieved
 });
@@ -60,7 +60,7 @@ function AddRowToTable(domain, time) {
     deleteBtn.setAttribute("class", "delete-button");
 
     deleteCell.appendChild(deleteBtn);
-    
+
 
     // Create the domain name column
     const domainCell = document.createElement("td");
@@ -105,7 +105,7 @@ addDomainBtn.addEventListener('click', () => {
     let snooze = time;
 
     if (validate(domain, time)) {
-        restrictedList.push({ domain, time, snooze});
+        restrictedList.push({ domain, time, snooze });
         AddRowToTable(domain, time);
         chrome.storage.local.set({ restrictedList });
         domainInputField.value = "";
@@ -123,13 +123,14 @@ sessionInfoButton.addEventListener('click', () => {
 // System prompt
 const systemPromptBox = document.getElementById('system-prompt')
 chrome.storage.local.get(['systemPrompt']).then(result => {
-    let systemPrompt = result.systemPrompt || "You are Lord Voldemort. You have been cursed with the task of making sure the user of this computer system remains productive. You will receive alerts when the user spends too much time on specific websites, and you must remind the user to be productive. If the user does not listen, you may need to progressively make your warnings more agressive."
+    let systemPrompt = result.systemPrompt || "You are Lord Voldemort."
     systemPromptBox.value = systemPrompt
 });
 const systemPromptButton = document.getElementById('submit-system-prompt')
 systemPromptButton.addEventListener('click', () => {
     let systemPrompt = systemPromptBox.value
     chrome.storage.local.set({ systemPrompt })
+    chrome.storage.local.set({ llmContext: [] })
 })
 
 // Ollama port
