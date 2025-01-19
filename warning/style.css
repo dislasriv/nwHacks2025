@@ -1,0 +1,69 @@
+/* General styling for the body */
+body {
+    font-family: "Arial", "Helvetica Neue", sans-serif;
+    background-color: #f9f9fb;
+    color: #333;
+    margin: 0;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    /* Base font size */
+    width: 300px;
+}
+
+/* Title styling */
+.title {
+    font-size: 16px;
+    /* Largest font size */
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #500e97;
+    text-align: center;
+}
+
+tr:hover td {
+    transform: scale(1.05);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    /* display: flex; */
+    height: 100vh;
+    background: hsl(232, 22%, 90%);
+    color: rgb(128, 76, 217);
+}
+
+body>* {
+    margin: auto;
+}
+
+button {
+    padding: 8px 16px;
+    background-color: #7748b9;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 13px;
+    /* Button font size */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+    width: 50%;
+    align-self: center;
+}
+
+button:hover {
+    background-color: #56239e;
+}
+
+/* Error message styling */
+.error-message {
+    color: red;
+    font-size: 13px;
+    margin: 5px;
+    text-align: center;
+}
