@@ -6,7 +6,7 @@
     "manifest_version": 3,
 
     "action": {
-      "default_popup": "popup/test.html",
+      "default_popup": "popup/popup.html",
       "default_icon": "images/test.png"
     },
 
@@ -14,7 +14,7 @@
         "service_worker": "background.js"
     },
 
-    "permissions":["notifications", "alarms"]
+    "permissions":["notifications", "alarms", "storage", "tabs"]
 
 
 }

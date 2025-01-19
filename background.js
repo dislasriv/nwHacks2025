@@ -1,23 +1,14 @@
 console.log("hello i am functioning and normal c:");
 
-
-
 //addListener in any any context takes a function as a parameter: the event handler
 chrome.runtime.onStartup.addListener(function(){
     console.log("browser was opened");
 
-
-    //create alarm
-        //-DelayInSeconds => time to first ping
-        //-PeriodInSeconds => time to repeat beyond that
-    chrome.alarms.create("periodicalPing", {delayInMinutes:1, periodInMinutes:1});
-
-    //notifications are little boxes that appear in bottom right of screen with an icon, title and message
     chrome.notifications.create({
         type: "basic",
         iconUrl: "images/test.png",
         title: "Welcome Back!",
-        message: "Your browser just started. ",
+        message: "Your browser just started.",
         priority: 2,
       })
 })
@@ -26,15 +17,24 @@ chrome.alarms.create('timer', { periodInMinutes: 1 });
 
 chrome.alarms.onAlarm.addListener(async (alarm) => {
     if (alarm.name === 'timer') {
+
       const activeTab = await chrome.tabs.query({ active: true, currentWindow: true });
 
       const domainRegex = /\/[^\/]+\//g;
 
+     //will error if user is doing split screen, or does not have chrome open at the moment (ie: active tab isnt defined)
       const url = domainRegex.exec(activeTab[0].url);
 
       const limit = 7;
-  
+      
+      chrome.action.setPopup({popup: "popup/popup.html"});
+      chrome.action.openPopup();
+    
+    //commenting this chunk out for now, im not sure why its necessary
+    /*
       chrome.storage.local.get(['websiteTimes'], async (result) => {
+
+        
         let websiteTimes = result.websiteTimes || {};
   
         if (websiteTimes[url]) {
@@ -50,4 +50,6 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
   
         await chrome.storage.local.set({ websiteTimes });
       });
-    });
+      */
+    }
+  });
