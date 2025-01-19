@@ -17,21 +17,19 @@ chrome.alarms.create('timer', { periodInMinutes: 1 });
 
 chrome.alarms.onAlarm.addListener(async (alarm) => {
     if (alarm.name === 'timer') {
-
       const activeTab = await chrome.tabs.query({ active: true, currentWindow: true });
-
       const domainRegex = /\/[^\/]+\//g;
 
-     //will error if user is doing split screen, or does not have chrome open at the moment (ie: active tab isnt defined)
+      //will error if user is doing split screen, or does not have chrome open at the moment (ie: active tab isnt defined)
       const url = domainRegex.exec(activeTab[0].url);
-
-      const limit = 7;
+     // a time limit in minutes for when the popup should occur
+      const limit = 1;
       
       chrome.action.setPopup({popup: "popup/popup.html"});
       chrome.action.openPopup();
     
-    //commenting this chunk out for now, im not sure why its necessary
-    /*
+    
+    
       chrome.storage.local.get(['websiteTimes'], async (result) => {
 
         
@@ -50,6 +48,6 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
   
         await chrome.storage.local.set({ websiteTimes });
       });
-      */
+      
     }
   });
