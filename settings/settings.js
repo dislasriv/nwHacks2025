@@ -1,11 +1,11 @@
 // Set of restricted domains and their time limits
-
+let restrictedList = [];
 
 // Retrieve restricted list from chrome.storage.local
-// chrome.storage.local.get(['restrictedList'], (result) => {
-//     restrictedList = result.restrictedList || [{ domain: "example.com", time: 1 }];
-//     renderTable();  // Render the table after data is retrieved
-// });
+chrome.storage.local.get(['restrictedList'], (result) => {
+    restrictedList = result.restrictedList || [];
+    renderTable();  // Render the table after data is retrieved
+});
 
 renderTable();
 
@@ -75,7 +75,7 @@ addDomainBtn.addEventListener('click', () => {
     if (validate(domain, time)) {
         restrictedList.push({ domain, time });
         AddRowToTable(domain, time);
-        chrome.storage.local.set({ websiteTimes });
+        chrome.storage.local.set({ restrictedList });
         domainInputField.value = "";
         timeInputField.value = "";
     }
