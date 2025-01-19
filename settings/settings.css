@@ -46,11 +46,6 @@ table {
   text-align: left;
 }
 
-th,
-td {
-  padding: 5px;
-}
-
 body {
   display: flex;
   height: 100vh;

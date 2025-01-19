@@ -1,18 +1,21 @@
 /* General styling for the body */
+/* General styling for the body */
 body {
   font-family: "Arial", "Helvetica Neue", sans-serif;
   background-color: #f9f9fb;
   color: #333;
   margin: 0;
+  display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 13px; /* Base font size */
+  font-size: 13px;
+  /* Base font size */
   width: 300px;
 }
 
 /* Main container styling */
 .container {
-  background-color: #000310;
+  background-color: #fff;
   padding: 20px;
   max-width: 1000px;
   width: 100%;
@@ -22,10 +25,11 @@ body {
 
 /* Title styling */
 .title {
-  font-size: 30px; /* Largest font size */
+  font-size: 16px;
+  /* Largest font size */
   font-weight: bold;
   margin-bottom: 20px;
-  color: #4b0d85;
+  color: #500e97;
   text-align: center;
 }
 
@@ -42,11 +46,6 @@ table {
   margin: 5% 5%;
   text-align: left;
 }
-th,
-td {
-  padding: 5px;
-}
-
 
 body > * {
   margin: auto;
@@ -70,15 +69,14 @@ input[type="number"]:focus {
   outline: none;
 }
 
-button {
+.button {
   padding: 8px 16px;
   background-color: #7748b9;
   color: #fff;
   border: none;
-  margin-top:15px;
-  margin-left: 15px;
   border-radius: 5px;
-  font-size: 13px; /* Button font size */
+  font-size: 13px;
+  /* Button font size */
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-bottom: 20px;
@@ -86,8 +84,17 @@ button {
   align-self: center;
 }
 
-button:hover {
+.button:hover {
   background-color: #56239e;
+}
+
+.navigation {
+  background-color: #228d72;
+  width: 100%;
+}
+
+.navigation:hover {
+  background-color: #1a6f5c;
 }
 
 /* Error message styling */
