@@ -32,7 +32,7 @@ function renderTable() {
 }
 
 // Unban a website
-function unbanWebsite(event) {
+function RemoveRestriction(event) {
     let row = event.target.parentNode;
     let url = row.children[1].innerText;
     restrictedList = restrictedList.filter(({ domain, time }) => domain != url)
@@ -46,9 +46,21 @@ function AddRowToTable(domain, time) {
     const row = document.createElement("tr");
 
     // Delete button
-    const deleteButton = document.createElement("td")
-    deleteButton.innerText = "x"
-    deleteButton.addEventListener('click', unbanWebsite)
+    const deleteCell = document.createElement("td");
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "X";
+    // Handle delete button click event
+    deleteBtn.addEventListener('click', (event) => {
+        const row = event.target.parentNode.parentNode;
+        const url = row.children[0].innerText;
+        restrictedList = restrictedList.filter(({ domain, time }) => domain != url)
+        chrome.storage.local.set({ restrictedList })
+        row.parentNode.removeChild(row);
+    });
+    deleteBtn.setAttribute("class", "delete-button");
+
+    deleteCell.appendChild(deleteBtn);
+    
 
     // Create the domain name column
     const domainCell = document.createElement("td");
@@ -56,12 +68,12 @@ function AddRowToTable(domain, time) {
 
     // Create the timer limit column
     const timeCell = document.createElement("td");
-    timeCell.textContent = `${time} minutes`;
+    timeCell.textContent = `${time} mins`;
 
     // Append cells to the row
-    row.appendChild(deleteButton)
     row.appendChild(domainCell);
     row.appendChild(timeCell);
+    row.appendChild(deleteCell)
 
     // Append the row to the table body
     tbody.appendChild(row);

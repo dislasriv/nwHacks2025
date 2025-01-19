@@ -17,10 +17,12 @@ body {
 .container {
   background-color: #fff;
   padding: 20px;
+  min-height: 500px;
   max-width: 1000px;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+  overflow-y: auto; /* Enable scrolling if necessary */
 }
 
 /* Title styling */
