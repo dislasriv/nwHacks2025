@@ -15,5 +15,11 @@
         "alarms",
         "storage",
         "tabs"
-    ]
+    ],
+    "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["settings/settings.js"]
+    }
+  ]
 }

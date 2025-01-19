@@ -1,9 +1,13 @@
 // Set of restricted domains and their time limits
-const restrictedList = [
-    { domain: "instagram.com", time: 30 },
-    { domain: "youtube.com", time: 60 },
-    { domain: "facebook.com", time: 45 },
-];
+
+
+// Retrieve restricted list from chrome.storage.local
+// chrome.storage.local.get(['restrictedList'], (result) => {
+//     restrictedList = result.restrictedList || [{ domain: "example.com", time: 1 }];
+//     renderTable();  // Render the table after data is retrieved
+// });
+
+renderTable();
 
 // Connect to HTML components
 const domainInputField = document.getElementById('domain-input');
@@ -45,9 +49,6 @@ function AddRowToTable(domain, time) {
     tbody.appendChild(row);
 }
 
-// Render the table on startup
-renderTable();
-
 // Add domain to restricted list
 function validate(domain, time) {
     if (domain === "" || time === "") {
@@ -69,13 +70,13 @@ function validate(domain, time) {
 // Add domain to restricted list on button click
 addDomainBtn.addEventListener('click', () => {
     const domain = domainInputField.value;
-    const time = timeInputField.value;
+    const time = parseInt(timeInputField.value, 10);
 
     if (validate(domain, time)) {
         restrictedList.push({ domain, time });
         AddRowToTable(domain, time);
+        chrome.storage.local.set({ websiteTimes });
+        domainInputField.value = "";
+        timeInputField.value = "";
     }
-
-    domainInputField.value = "";
-    timeInputField.value = "";
 });
