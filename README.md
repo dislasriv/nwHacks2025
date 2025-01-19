@@ -22,7 +22,7 @@ Through this process, our team had the opportunity to create a Chrome extension 
 
 **Ready to take control of your time? Try it out and "set your sites" on a better, more productive you!🤩**
 
-Note: Before running the Chrome Extension, you must have Ollama set up
+Note: Before running the Chrome Extension, you must have Ollama set up locally.
 
 ## Setting up ollama
 
