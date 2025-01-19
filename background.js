@@ -35,16 +35,16 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
         // a time limit in minutes for when the popup should occur
         const limit = 2;
 
-        chrome.storage.local.get(["date"]).then(async (result) => {
-            let currDate = new Date(new Date().toDateString());
-            if (result != currDate) {
-                // clear website timings from previous days
-                chrome.storage.local.set({ "websiteTimes": {} });
-                chrome.storage.local.set({ llmContex: [] });
-                // update stored date
-                await chrome.storage.local.set({ "date": currDate });
-            }
-        });
+        // chrome.storage.local.get(["date"]).then(async (result) => {
+        //     let currDate = new Date(new Date().toDateString());
+        //     if (result != currDate) {
+        //         // clear website timings from previous days
+        //         chrome.storage.local.set({ "websiteTimes": {} });
+        //         chrome.storage.local.set({ llmContex: [] });
+        //         // update stored date
+        //         await chrome.storage.local.set({ "date": currDate });
+        //     }
+        // });
 
         // Retrieve restricted list from chrome.storage.local
         let restrictionsRes = await chrome.storage.local.get(['restrictedList']);
