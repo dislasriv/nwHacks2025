@@ -67,6 +67,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
       }
       // log time in minutes spent
       console.log(websiteTimes[url]);
+      chrome.storage.local.set({websiteTimes});
 
         // Retrieve restricted list from chrome.storage.local
         chrome.storage.local.get(['restrictedList'], async(result) => {
@@ -117,12 +118,17 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
     
                 // Save the new context
                 chrome.storage.local.set({ llmContext: context });
+
+                
     
                 chrome.action.setPopup({ popup: "warning/warning.html" });
                 chrome.action.openPopup();
                 chrome.action.setPopup({ popup: "session_info/session_info.html" });
             }
         });
+      }
+    }
+});
        
 
 chrome.testyell = async function () {
