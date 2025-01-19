@@ -6,8 +6,8 @@
     "manifest_version": 3,
 
     "action": {
-      "default_popup": "popup/session_info.html",
-      "default_icon": "images/test.png"
+      "default_popup": "settings/settings.html",
+      "default_icon": "settings/timer.png"
     },
 
     "background":{

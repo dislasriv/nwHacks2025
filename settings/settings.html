@@ -1,0 +1,40 @@
+<link href="settings.css" rel="stylesheet" type="text/css" />
+<script type="module" src="settings.js"></script>
+
+<!-- Main Body -->
+<div class="container">
+
+    <!-- Title -->
+    <div>
+        <div class="title">Restricted Websites</div>
+    </div>
+
+    <!-- Table of Restricted Websites -->
+    <div class = "data-table">
+        <table id="domain-list">
+            <thead>
+            <tr>
+                <th>Website</th>
+                <th>Timer Limit</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Rows will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Adding a domain to restricted list -->
+    <div>
+        <input type="text" id="domain-input" placeholder="Enter website">
+        <input type="number" id="time-input" placeholder="Timer Limit (in minutes)" min="5" step="5">    
+
+        <!-- Error Messages -->
+        <div class = "error-message">
+            <text id="error-message-text"></text>
+        </div>
+
+        <button id="add-domain-btn" class="button">Add Website</button>
+    </div>
+    
+</div>
