@@ -1,15 +1,22 @@
 <link href="session_info.css" rel="stylesheet" type="text/css" />
+<script type="module" src="session_info.js"></script>
 
-<!DOCTYPE html>
-<html>
-<head>
-  <title> Website Time Tracker </title>
-</head>
-<body>
-  <button id="settings-button">Settings</button>
-  <h1 class="title">Website Time Tracker</h1>
-  
-  <ul id="website-list"></ul>
-  <script src="session_info.js"></script>
-</body>
-</html>
+
+<div class="container">
+    <div>
+        <div class="title">Time Tracker</div>
+    </div>
+
+    <!-- Table of Restricted Websites -->
+    <div class="data-table">
+        <table id="domain-list">
+            <tbody>
+                <!-- Rows will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <button id="settings-button" class="button navigation">Settings</button>
+    </div>
+</div>

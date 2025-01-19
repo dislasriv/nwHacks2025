@@ -47,6 +47,13 @@ table {
   text-align: left;
 }
 
+body {
+  display: flex;
+  height: 100vh;
+  background: hsl(232, 22%, 90%);
+  color: rgb(128, 76, 217);
+}
+
 body > * {
   margin: auto;
 }

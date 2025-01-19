@@ -17,13 +17,8 @@ const domainListElement = document.getElementById('domain-list');
 const errorMessageElement = document.getElementById('error-message-text');
 const tableHeader = document.getElementById('table-header');
 
-if (restrictedList.length === 0) {
-    console.log("No restricted domains");
-    tableHeader.style.display = "none";
-} else {
-    tableHeader.style.display = "";
-    renderTable();
-}
+// Render the table on startup
+renderTable();
 
 // Function to render the table rows
 function renderTable() {
@@ -95,7 +90,7 @@ addDomainBtn.addEventListener('click', () => {
 
 sessionInfoButton.addEventListener('click', () => {
     window.close();
-    chrome.alarms.create('screenTransition', {delayInMinutes: 0.01});
+    chrome.alarms.create('screenTransition', {delayInMinutes: 0.001});
     chrome.action.setPopup({popup: "session_info/session_info.html"});
 });
 
