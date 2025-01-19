@@ -40,6 +40,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
             if (result != currDate) {
                 // clear website timings from previous days
                 chrome.storage.local.set({ "websiteTimes": {} });
+                chrome.storage.local.set({ llmContex: [] });
                 // update stored date
                 await chrome.storage.local.set({ "date": currDate });
             }
