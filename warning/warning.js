@@ -9,6 +9,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     let context = (await chrome.storage.local.get(['llmContext'])).llmContext
     let warningMessageDiv = document.getElementById("warning-message")
     warningMessageDiv.innerText = context[context.length - 1].content;
+
+    exitButton.addEventListener("click", async () => {
+        const activeTab = await chrome.tabs.query({ active: true, currentWindow: true });
+        console.log("tab");
+        chrome.tabs.remove(activeTab[0].id);
+    });
 });
 
 
