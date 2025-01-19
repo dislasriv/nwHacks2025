@@ -1,6 +1,9 @@
 
 //Fires when HTML has been completely loaded and parsed
 document.addEventListener('DOMContentLoaded', () => {
+    //event setup
+    const settingsButton = document.getElementById('settings-button');
+
     //HTML component website-list on popup.html
     const websiteList = document.getElementById('website-list');
 
@@ -25,4 +28,13 @@ document.addEventListener('DOMContentLoaded', () => {
             websiteList.appendChild(listItem);
         }
     });
-});
+
+
+    //EVENT LISTENERS:
+    settingsButton.addEventListener("click", ()=>{
+      window.close();
+      chrome.alarms.create('screenTransition', {delayInMinutes: 0.01});
+      chrome.action.setPopup({popup: "settings/settings.html"});
+    });
+
+  });

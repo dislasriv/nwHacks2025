@@ -5,6 +5,13 @@ console.log("hello i am functioning and normal c:");
 chrome.runtime.onStartup.addListener(function () {
   console.log("browser was opened");
 
+    chrome.notifications.create({
+        type: "basic",
+        iconUrl: "settings/timer.png",
+        title: "Welcome Back!",
+        message: "Your browser just started.",
+        priority: 2,
+      })
   chrome.notifications.create({
     type: "basic",
     iconUrl: "images/test.png",
@@ -14,12 +21,15 @@ chrome.runtime.onStartup.addListener(function () {
   })
 })
 
+
+//APP WIDE ALARMS
 chrome.alarms.create('timer', { periodInMinutes: 1 });
 
 chrome.alarms.onAlarm.addListener(async (alarm) => {
-  if (alarm.name === 'timer') {
-    const activeTab = await chrome.tabs.query({ active: true, currentWindow: true });
-    const domainRegex = /\/[^\/]+\//g;
+  //Timer alarm that fires every minute to increment amount of time spent on sites
+    if (alarm.name === 'timer') {
+      const activeTab = await chrome.tabs.query({ active: true, currentWindow: true });
+      const domainRegex = /\/[^\/]+\//g;
 
     //will error if user is doing split screen, or does not have chrome open at the moment (ie: active tab isnt defined)
     const url = domainRegex.exec(activeTab[0].url);
@@ -58,6 +68,9 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
           //at limit make popup
           // if (websiteTimes[url] > limit) { // TODO: change back to =
             chrome.action.setPopup({ popup: "warning/warning.html" });
+        //at limit make popup
+        if(websiteTimes[url] == limit) {
+            chrome.action.setPopup({popup: "session_info/session_info.html"});
             chrome.action.openPopup();
             chrome.action.setPopup({ popup: "popup/session_info.html" });
 
@@ -65,11 +78,18 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 
           //asynchonous call to store "websiteTimes":websiteTimes on local storage (ie:update the WebsiteTimes structure)
           await chrome.storage.local.set({ websiteTimes });
-        });
+        }});
 
       // }
 
     // });
 
+  }
+  //Whenever you switch screens
+  // 1. Swap the popup
+  // 2. close the window
+  // 3. create a new screenTransition alarm
+  else if(alarm.name === "screenTransition"){
+    chrome.action.openPopup();
   }
 });

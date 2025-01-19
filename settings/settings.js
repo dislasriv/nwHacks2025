@@ -13,6 +13,7 @@ renderTable();
 const domainInputField = document.getElementById('domain-input');
 const timeInputField = document.getElementById('time-input');
 const addDomainBtn = document.getElementById('add-domain-btn');
+const sessionInfoButton = document.getElementById('session-info-button');
 
 const domainListElement = document.getElementById('domain-list');
 const errorMessageElement = document.getElementById('error-message-text');
@@ -67,6 +68,7 @@ function validate(domain, time) {
     return true;
 }
 
+// BUTTON CLICK EVENTS
 // Add domain to restricted list on button click
 addDomainBtn.addEventListener('click', () => {
     const domain = domainInputField.value;
@@ -82,6 +84,12 @@ addDomainBtn.addEventListener('click', () => {
 
     domainInputField.value = "";
     timeInputField.value = "";
+});
+
+sessionInfoButton.addEventListener('click', () => {
+    window.close();
+    chrome.alarms.create('screenTransition', {delayInMinutes: 0.01});
+    chrome.action.setPopup({popup: "session_info/session_info.html"});
 });
 
 // System prompt
