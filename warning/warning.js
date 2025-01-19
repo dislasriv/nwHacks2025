@@ -3,6 +3,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     //HTML component website-list on popup.html
     const websiteList = document.getElementById('website-list');
+    const exitButton = document.getElementById('exit-button');
 
     // get websiteTimes OBJECT
     // get prompt for chosen character
@@ -57,6 +58,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Save the new context
         chrome.storage.local.set({ llmContext: context });
+    })
+
+    
+    exitButton.addEventListener("click", async () => {
+        const activeTab = await chrome.tabs.query({ active: true, currentWindow: true });
+        console.log("tab");
+        chrome.tabs.remove(activeTab[0].id);
     })
 
 });
