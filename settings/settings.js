@@ -95,3 +95,14 @@ systemPromptButton.addEventListener('click', () => {
     let systemPrompt = systemPromptBox.value
     chrome.storage.local.set({ systemPrompt })
 })
+
+// Ollama port
+const ollamaPortBox = document.getElementById('ollama-port')
+chrome.storage.local.get(['ollamaPort']).then(result => {
+    let ollamaPort = result.ollamaPort || 11434
+    ollamaPortBox.value = ollamaPort
+});
+ollamaPortBox.addEventListener("input", event => {
+    let ollamaPort = event.target.value
+    chrome.storage.local.set({ ollamaPort })
+})
