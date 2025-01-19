@@ -90,9 +90,10 @@ function validate(domain, time) {
 addDomainBtn.addEventListener('click', () => {
     const domain = domainInputField.value;
     const time = parseInt(timeInputField.value, 10);
+    let snooze = time;
 
     if (validate(domain, time)) {
-        restrictedList.push({ domain, time });
+        restrictedList.push({ domain, time, snooze});
         AddRowToTable(domain, time);
         chrome.storage.local.set({ restrictedList });
         domainInputField.value = "";
