@@ -89,9 +89,7 @@ addDomainBtn.addEventListener('click', () => {
 });
 
 sessionInfoButton.addEventListener('click', () => {
-    window.close();
-    chrome.alarms.create('screenTransition', {delayInMinutes: 0.001});
-    chrome.action.setPopup({popup: "session_info/session_info.html"});
+    location.href = "/session_info/session_info.html"
 });
 
 // System prompt

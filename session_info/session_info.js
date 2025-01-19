@@ -30,9 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //EVENT LISTENERS:
   settingsButton.addEventListener("click", () => {
-    window.close();
-    chrome.alarms.create('screenTransition', { delayInMinutes: 0.01 });
-    chrome.action.setPopup({ popup: "settings/settings.html" });
+    location.href = "/settings/settings.html";
   });
   //EVENT LISTENERS:
   const settingsButton = document.getElementById('settings-button');
