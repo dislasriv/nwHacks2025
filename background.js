@@ -29,25 +29,28 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
       chrome.action.openPopup();
     
     
-    
+      //get 'websiteTimes' object and run the arrow function on it
       chrome.storage.local.get(['websiteTimes'], async (result) => {
-
-        
+        // assign result.webtimes OR an empty dict if that is not defined
         let websiteTimes = result.websiteTimes || {};
-  
+        
+        //instantiate/increment websiteTimes[url] keyval pair
         if (websiteTimes[url]) {
           websiteTimes[url] += 1;
         } else {
           websiteTimes[url] = 1;
         }
+        // log time in minutes spent
         console.log(websiteTimes[url]);
+
+        //at limit make popup
         if(websiteTimes[url] == limit) {
-            chrome.action.setPopup("popup.html");
+            chrome.action.setPopup({popup: "popup/session_info.html"});
             chrome.action.openPopup();
         }
-  
+        
+        //asynchonous call to store "websiteTimes":websiteTimes on local storage (ie:update the WebsiteTimes structure)
         await chrome.storage.local.set({ websiteTimes });
       });
-      
     }
   });

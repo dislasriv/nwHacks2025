@@ -1,12 +1,23 @@
+
+//Assumption
 document.addEventListener('DOMContentLoaded', () => {
+    //HTML component website-list on popup.html
     const websiteList = document.getElementById('website-list');
-  
+
+    //get websiteTimes OBJECT
     chrome.storage.local.get(['websiteTimes'], (result) => {
+      // assign result.webtimes OR an empty object if that is not defined
+          // result is the object returned when 'websiteTimes' is queried
       const websiteTimes = result.websiteTimes || {};
-  
+      
+      //object.entries returns a list of the key-value pairs that website times is composed of...
+        //const [url, time] deconstructs these pairs into two vars
       for (const [url, time] of Object.entries(websiteTimes)) {
+        //add element to body of HTML (li element)
         const listItem = document.createElement('li');
+        //compose the text
         listItem.textContent = `${url}: ${time} minutes`;
+        //add new HTML element to website-list (id) HTML object
         websiteList.appendChild(listItem);
       }
     });
