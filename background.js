@@ -146,3 +146,12 @@ async function yell(url) {
         mutex = false
     }
 }
+
+chrome.openwarning = function () {
+    setTimeout(() => {
+        chrome.action.setPopup({ popup: "warning/warning.html" });
+        chrome.action.openPopup();
+        chrome.action.setPopup({ popup: "session_info/session_info.html" });
+    }, 3000)
+    console.log("Focus chromium now")
+}
