@@ -14,7 +14,7 @@
     <div class="data-table">
         <table id="domain-list">
             <thead>
-                <tr>
+                <tr id="table-header">
                     <th>Website</th>
                     <th>Timer Limit</th>
                 </tr>
@@ -36,14 +36,20 @@
         </div>
 
         <button id="add-domain-btn" class="button">Add Website</button>
-        <div>
-            <div class="title">LLM settings</div>
-            System prompt:
-            <textarea id="system-prompt" placeholder="Describe the character..."></textarea>
-            <input type="button" id="submit-system-prompt" value="Submit"><br>
 
-            Ollama port:
-            <input id="ollama-port" placeholder="Port number"></input>
+    </div>
+
+    <div>
+        <div>
+            <div class="title">My Accountability Buddy</div>
+        </div>
+
+        <div>
+            <textarea class="agent-description" id="system-prompt" placeholder="Describe your perfect buddy..."></textarea>
+
+            <input class="agent-description" id="ollama-port" placeholder="Port number"></input>
+
+            <input class="button" type="button" id="submit-system-prompt" value="Submit"><br>
         </div>
     </div>
 

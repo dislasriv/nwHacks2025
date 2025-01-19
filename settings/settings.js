@@ -7,8 +7,6 @@ chrome.storage.local.get(['restrictedList'], (result) => {
     renderTable();  // Render the table after data is retrieved
 });
 
-renderTable();
-
 // Connect to HTML components
 const domainInputField = document.getElementById('domain-input');
 const timeInputField = document.getElementById('time-input');
@@ -17,6 +15,15 @@ const sessionInfoButton = document.getElementById('session-info-button');
 
 const domainListElement = document.getElementById('domain-list');
 const errorMessageElement = document.getElementById('error-message-text');
+const tableHeader = document.getElementById('table-header');
+
+if (restrictedList.length === 0) {
+    console.log("No restricted domains");
+    tableHeader.style.display = "none";
+} else {
+    tableHeader.style.display = "";
+    renderTable();
+}
 
 // Function to render the table rows
 function renderTable() {

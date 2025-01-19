@@ -108,6 +108,17 @@ input[type="number"]:focus {
   text-align: center;
 }
 
+.agent-description {
+    width: 100%;
+    padding: 8px;
+    margin: 0px 0 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 13px;
+    /* Input font size */
+    box-sizing: border-box;
+}
+
 #system-prompt {
   width: 100%;
   resize: vertical;
