@@ -100,6 +100,14 @@ input[type="number"]:focus {
   background-color: #56239e;
 }
 
+.navigation {
+    background-color: #228d72;
+    width: 100%;
+}
+
+.navigation:hover {
+    background-color: #1a6f5c;
+}
 /* Error message styling */
 .error-message {
   color: red;
