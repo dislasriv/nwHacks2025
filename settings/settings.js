@@ -79,4 +79,19 @@ addDomainBtn.addEventListener('click', () => {
         domainInputField.value = "";
         timeInputField.value = "";
     }
+
+    domainInputField.value = "";
+    timeInputField.value = "";
 });
+
+// System prompt
+const systemPromptBox = document.getElementById('system-prompt')
+chrome.storage.local.get(['systemPrompt']).then(result => {
+    let systemPrompt = result.systemPrompt || "You are Lord Voldemort. You have been cursed with the task of making sure the user of this computer system remains productive. You will receive alerts when the user spends too much time on specific websites, and you must remind the user to be productive. If the user does not listen, you may need to progressively make your warnings more agressive."
+    systemPromptBox.value = systemPrompt
+});
+const systemPromptButton = document.getElementById('submit-system-prompt')
+systemPromptButton.addEventListener('click', () => {
+    let systemPrompt = systemPromptBox.value
+    chrome.storage.local.set({ systemPrompt })
+})

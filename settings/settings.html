@@ -10,16 +10,16 @@
     </div>
 
     <!-- Table of Restricted Websites -->
-    <div class = "data-table">
+    <div class="data-table">
         <table id="domain-list">
             <thead>
-            <tr>
-                <th>Website</th>
-                <th>Timer Limit</th>
-            </tr>
+                <tr>
+                    <th>Website</th>
+                    <th>Timer Limit</th>
+                </tr>
             </thead>
             <tbody>
-            <!-- Rows will be dynamically added here -->
+                <!-- Rows will be dynamically added here -->
             </tbody>
         </table>
     </div>
@@ -27,14 +27,19 @@
     <!-- Adding a domain to restricted list -->
     <div>
         <input type="text" id="domain-input" placeholder="Enter website">
-        <input type="number" id="time-input" placeholder="Timer Limit (in minutes)" min="5" step="5">    
+        <input type="number" id="time-input" placeholder="Timer Limit (in minutes)" min="5" step="5">
 
         <!-- Error Messages -->
-        <div class = "error-message">
+        <div class="error-message">
             <text id="error-message-text"></text>
         </div>
 
         <button id="add-domain-btn" class="button">Add Website</button>
+        <div>
+            <div class="title">System prompt</div>
+            <textarea id="system-prompt" placeholder="Describe the character..."></textarea>
+            <input type="button" id="submit-system-prompt" value="Submit">
+        </div>
     </div>
-    
+
 </div>

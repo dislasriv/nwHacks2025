@@ -7,7 +7,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 13px; /* Base font size */
+  font-size: 13px;
+  /* Base font size */
   width: 300px;
 }
 
@@ -23,7 +24,8 @@ body {
 
 /* Title styling */
 .title {
-  font-size: 16px; /* Largest font size */
+  font-size: 16px;
+  /* Largest font size */
   font-weight: bold;
   margin-bottom: 20px;
   color: #500e97;
@@ -43,6 +45,7 @@ table {
   margin: 5% 5%;
   text-align: left;
 }
+
 th,
 td {
   padding: 5px;
@@ -55,7 +58,7 @@ body {
   color: rgb(128, 76, 217);
 }
 
-body > * {
+body>* {
   margin: auto;
 }
 
@@ -67,7 +70,8 @@ input[type="number"] {
   margin: 0px 0 10px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 13px; /* Input font size */
+  font-size: 13px;
+  /* Input font size */
   box-sizing: border-box;
 }
 
@@ -83,7 +87,8 @@ input[type="number"]:focus {
   color: #fff;
   border: none;
   border-radius: 5px;
-  font-size: 13px; /* Button font size */
+  font-size: 13px;
+  /* Button font size */
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-bottom: 20px;
@@ -101,4 +106,10 @@ input[type="number"]:focus {
   font-size: 13px;
   margin: 5px;
   text-align: center;
+}
+
+#system-prompt {
+  width: 100%;
+  resize: vertical;
+  height: 10em;
 }
