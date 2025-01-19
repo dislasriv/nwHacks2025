@@ -1,6 +1,6 @@
 {
     "name": "Set Your Sites",
-    "description": "A simple extension to save you from yourself. Decide what websites to limit your time on so you can focus on your goals and achieve the life you want.",
+    "description": "Try binging YouTube videos with Voldemort over your shoulder. Limit your website usage on so you can focus on your goals and achieve the life you want.",
     "version": "0.1.0",
     "manifest_version": 3,
     "action": {
