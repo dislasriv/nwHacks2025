@@ -22,7 +22,7 @@ chrome.runtime.onStartup.addListener(function () {
 
 
 //APP WIDE ALARMS
-chrome.alarms.create('timer', { periodInMinutes: 1 });
+chrome.alarms.create('timer', { periodInMinutes: 0.1 });
 
 chrome.alarms.onAlarm.addListener(async (alarm) => {
     //Timer alarm that fires every minute to increment amount of time spent on sites
@@ -46,19 +46,22 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
         // });
 
         // Retrieve restricted list from chrome.storage.local
-        let restrictionsRes = await chrome.storage.local.get(['restrictedList']);
-        let restrictedList = restrictionsRes.restrictedList;
-
+        let restrictedList = await chrome.storage.local.get(['restrictedList']);
+        restrictedList = restrictedList["restrictedList"]
+       
         //get 'websiteTimes' object and run the arrow function on it
         let result = await chrome.storage.local.get(['websiteTimes']);
         // assign result.webtimes OR an empty dict if that is not defined
         let websiteTimes = result.websiteTimes || {};
 
     let restrictedSiteIndex = restrictedList.find((site) => site.domain == url);
+    console.log(restrictedSiteIndex)
 
     if (restrictedSiteIndex) {
 
-      const restriction = restrictedList[restrictedSiteIndex];
+      const restriction = restrictedSiteIndex
+      console.log(restriction);
+    
       //instantiate/increment websiteTimes[url] keyval pair
       if (websiteTimes[url]) {
         websiteTimes[url] += 1;
@@ -75,19 +78,15 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
             let domainsList = restrictedList.map(item => item.domain);
             console.log(url);
             console.log(domainsList);
-            if (domainsList.includes(url) && websiteTimes[url] >= restriction.time) {
-                console.log("hangry");
-                chrome.action.setPopup({ popup: "warning/warning.html" });
-                chrome.action.openPopup();
-                chrome.action.setPopup({ popup: "session_info/session_info.html" });
-                
+
+            if (domainsList.includes(url) && websiteTimes[url] >= restriction["time"]) { 
                 //at limit, prompt ollama
                 // get websiteTimes OBJECT
                 // get prompt for chosen character
                 let result = await chrome.storage.local.get(['websiteTimes', 'systemPrompt', 'ollamaPort', 'llmContext'])
                 // assign result.webtimes OR an empty object if that is not defined
                 // result is the object returned when 'websiteTimes' is queried
-                const websiteTimes = result.websiteTimes || {}; // TODO: vvv
+                //const websiteTimes = result.websiteTimes || {}; // TODO: vvv
                 let systemPrompt = result.systemPrompt || "You are Lord Voldemort. You have been cursed with the task of making sure the user of this computer system remains productive. You will receive alerts when the user spends too much time on specific websites, and you must remind the user to be productive. If the user does not listen, you may need to progressively make your warnings more agressive."
                 let ollamaPort = result.ollamaPort || 11434
                 let context = result.llmContext || []
@@ -119,8 +118,6 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
                 // Save the new context
                 chrome.storage.local.set({ llmContext: context });
 
-                
-    
                 chrome.action.setPopup({ popup: "warning/warning.html" });
                 chrome.action.openPopup();
                 chrome.action.setPopup({ popup: "session_info/session_info.html" });
