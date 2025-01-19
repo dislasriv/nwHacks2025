@@ -75,6 +75,8 @@ button {
   background-color: #7748b9;
   color: #fff;
   border: none;
+  margin-top:15px;
+  margin-left: 15px;
   border-radius: 5px;
   font-size: 13px; /* Button font size */
   cursor: pointer;

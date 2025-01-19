@@ -17,8 +17,6 @@ chrome.runtime.onStartup.addListener(function(){
 //APP WIDE ALARMS
 chrome.alarms.create('timer', { periodInMinutes: 1 });
 
-
-
 chrome.alarms.onAlarm.addListener(async (alarm) => {
   //Timer alarm that fires every minute to increment amount of time spent on sites
     if (alarm.name === 'timer') {

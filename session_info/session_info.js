@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //EVENT LISTENERS:
     settingsButton.addEventListener("click", ()=>{
-      console.log("hello diddy");
       window.close();
       chrome.alarms.create('screenTransition', {delayInMinutes: 0.01});
       chrome.action.setPopup({popup: "settings/settings.html"});
