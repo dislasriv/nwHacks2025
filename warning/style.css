@@ -1,15 +1,14 @@
 /* General styling for the body */
 body {
     font-family: "Arial", "Helvetica Neue", sans-serif;
-    background-color: #f9f9fb;
     color: #333;
     margin: 0;
-    /* display: flex; */
     justify-content: center;
     align-items: center;
     font-size: 13px;
     /* Base font size */
     width: 300px;
+    padding: 15px;
 }
 
 /* Title styling */
@@ -33,7 +32,6 @@ tr:hover td {
 body {
     /* display: flex; */
     height: 100vh;
-    background: hsl(232, 22%, 90%);
     color: rgb(128, 76, 217);
 }
 
@@ -51,9 +49,14 @@ button {
     /* Button font size */
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-bottom: 20px;
+    margin: 10px;
     width: 50%;
     align-self: center;
+}
+
+#exit-button {
+    background-color: #228d72;
+    margin-top: 0;
 }
 
 button:hover {
