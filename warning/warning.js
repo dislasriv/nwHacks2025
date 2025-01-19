@@ -13,10 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const websiteTimes = result.websiteTimes || {};
         let systemPrompt = result.systemPrompt || "You are Lord Voldemort. You have been cursed with the task of making sure the user of this computer system remains productive. You will receive alerts when the user spends too much time on specific websites, and you must remind the user to be productive. If the user does not listen, you may need to progressively make your warnings more agressive."
         let ollamaPort = result.ollamaPort || 11434
-        let context = result.llmContext || {}
+        let context = result.llmContext || []
 
         // get current url
-        url = location.hostname
+        const activeTab = await chrome.tabs.query({ active: true, currentWindow: true });
+        const url = (new URL(activeTab[0].url)).hostname;
 
         // Add a message to the context
         context.push({
