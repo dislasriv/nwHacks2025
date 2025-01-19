@@ -152,5 +152,5 @@ input[type="number"]:focus {
 #system-prompt {
   width: 100%;
   resize: vertical;
-  height: 10em;
+  height: 4em;
 }
