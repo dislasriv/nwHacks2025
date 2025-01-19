@@ -72,6 +72,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
             chrome.action.setPopup({ popup: "session_info/session_info.html" });
           }
 
+
           //asynchonous call to store "websiteTimes":websiteTimes on local storage (ie:update the WebsiteTimes structure)
           await chrome.storage.local.set({ websiteTimes });
         });
