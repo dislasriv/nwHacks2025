@@ -1,5 +1,5 @@
 
-//Assumption
+//Fires when HTML has been completely loaded and parsed
 document.addEventListener('DOMContentLoaded', () => {
     //HTML component website-list on popup.html
     const websiteList = document.getElementById('website-list');
@@ -15,8 +15,12 @@ document.addEventListener('DOMContentLoaded', () => {
       for (const [url, time] of Object.entries(websiteTimes)) {
         //add element to body of HTML (li element)
         const listItem = document.createElement('li');
+
+        //process the URL
+        formatUrl =  url.split("/");
+        formatUrl = formatUrl[1];
         //compose the text
-        listItem.textContent = `${url}: ${time} minutes`;
+        listItem.textContent = `${formatUrl}: ${time} minutes`;
         //add new HTML element to website-list (id) HTML object
         websiteList.appendChild(listItem);
       }

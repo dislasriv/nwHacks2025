@@ -6,7 +6,7 @@
     "manifest_version": 3,
 
     "action": {
-      "default_popup": "popup/popup.html",
+      "default_popup": "popup/session_info.html",
       "default_icon": "images/test.png"
     },
 

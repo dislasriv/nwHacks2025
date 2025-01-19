@@ -24,10 +24,6 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
       const url = domainRegex.exec(activeTab[0].url);
      // a time limit in minutes for when the popup should occur
       const limit = 1;
-      
-      chrome.action.setPopup({popup: "popup/popup.html"});
-      chrome.action.openPopup();
-    
     
       //get 'websiteTimes' object and run the arrow function on it
       chrome.storage.local.get(['websiteTimes'], async (result) => {
