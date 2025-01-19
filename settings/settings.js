@@ -46,9 +46,21 @@ function AddRowToTable(domain, time) {
     const row = document.createElement("tr");
 
     // Delete button
-    const deleteButton = document.createElement("td")
-    deleteButton.innerText = "x"
-    deleteButton.addEventListener('click', RemoveRestriction)
+    const deleteCell = document.createElement("td");
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "X";
+    // Handle delete button click event
+    deleteBtn.addEventListener('click', (event) => {
+        const row = event.target.parentNode.parentNode;
+        const url = row.children[1].innerText;
+        restrictedList = restrictedList.filter(({ domain, time }) => domain != url)
+        chrome.storage.local.set({ restrictedList })
+        row.parentNode.removeChild(row);
+    });
+    deleteBtn.setAttribute("class", "delete-button");
+
+    deleteCell.appendChild(deleteBtn);
+    
 
     // Create the domain name column
     const domainCell = document.createElement("td");
@@ -59,9 +71,9 @@ function AddRowToTable(domain, time) {
     timeCell.textContent = `${time} minutes`;
 
     // Append cells to the row
-    row.appendChild(deleteButton)
     row.appendChild(domainCell);
     row.appendChild(timeCell);
+    row.appendChild(deleteCell)
 
     // Append the row to the table body
     tbody.appendChild(row);

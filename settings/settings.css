@@ -103,6 +103,24 @@ input[type="number"]:focus {
 .navigation:hover {
     background-color: #1a6f5c;
 }
+
+.delete-button {
+  /* padding: 8px 16px; */
+  background-color: #d4c4da;
+  color: #7748b9;
+  border: none;
+  border-radius: 5px;
+  font-size: 10px;
+  /* Button font size */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 5px;
+  margin-left: 15px;
+  width: 20px;
+  height: 20px;
+  align-self: right;
+}
+
 /* Error message styling */
 .error-message {
   color: red;
