@@ -20,9 +20,8 @@ chrome.runtime.onStartup.addListener(function () {
     })
 })
 
-
 //APP WIDE ALARMS
-chrome.alarms.create('timer', { periodInMinutes: 0.1 });
+chrome.alarms.create('timer', { periodInMinutes: 1 });
 
 chrome.alarms.onAlarm.addListener(async (alarm) => {
     //Timer alarm that fires every minute to increment amount of time spent on sites
@@ -30,7 +29,6 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
         const activeTab = await chrome.tabs.query({ active: true, currentWindow: true });
 
         //will error if user is doing split screen, or does not have chrome open at the moment (ie: active tab isnt defined)
-        console.log(activeTab)
         const url = (new URL(activeTab[0].url)).hostname;
         // a time limit in minutes for when the popup should occur
 
@@ -48,14 +46,14 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
         // Retrieve restricted list from chrome.storage.local
         let restrictedList = await chrome.storage.local.get(['restrictedList']);
         restrictedList = restrictedList["restrictedList"]
-
+        
         //get 'websiteTimes' object and run the arrow function on it
         let result = await chrome.storage.local.get(['websiteTimes']);
         // assign result.webtimes OR an empty dict if that is not defined
         let websiteTimes = result.websiteTimes || {};
-
+        
         let restriction = restrictedList.find((site) => site.domain == url);
-
+        console.log(restriction);
         if (restriction) {
 
             //instantiate/increment websiteTimes[url] keyval pair
@@ -71,8 +69,9 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
             // Retrieve restricted list from chrome.storage.local
             let domainsList = restrictedList.map(item => item.domain);
             console.log(url);
-            console.log(domainsList);
-            if (domainsList.includes(url) && websiteTimes[url] >= restriction.time) {
+            
+            // for yell to trigger, time must be above base and snooze (snooze is base plus some constant times 15)
+            if (domainsList.includes(url) && websiteTimes[url] >= restriction["time"] && websiteTimes[url] >= restriction["snooze"]) {  
                 await yell(url);
             }
         }
