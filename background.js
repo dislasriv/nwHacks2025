@@ -2,22 +2,22 @@
 
 //addListener in any any context takes a function as a parameter: the event handler
 chrome.runtime.onStartup.addListener(function () {
-    console.log("browser was opened");
+  console.log("browser was opened");
 
-    chrome.notifications.create({
-        type: "basic",
-        iconUrl: "settings/timer.png",
-        title: "Welcome Back!",
-        message: "Your browser just started.",
-        priority: 2,
-    })
-    chrome.notifications.create({
-        type: "basic",
-        iconUrl: "images/test.png",
-        title: "Welcome Back!",
-        message: "Your browser just started.",
-        priority: 2,
-    })
+  chrome.notifications.create({
+    type: "basic",
+    iconUrl: "settings/timer.png",
+    title: "Welcome Back!",
+    message: "Your browser just started.",
+    priority: 2,
+  })
+  chrome.notifications.create({
+    type: "basic",
+    iconUrl: "images/test.png",
+    title: "Welcome Back!",
+    message: "Your browser just started.",
+    priority: 2,
+  })
 })
 
 
@@ -25,44 +25,46 @@ chrome.runtime.onStartup.addListener(function () {
 chrome.alarms.create('timer', { periodInMinutes: 0.1 });
 
 chrome.alarms.onAlarm.addListener(async (alarm) => {
-    //Timer alarm that fires every minute to increment amount of time spent on sites
-    if (alarm.name === 'timer') {
-        const activeTab = await chrome.tabs.query({ active: true, currentWindow: true });
+  //Timer alarm that fires every minute to increment amount of time spent on sites
+  if (alarm.name === 'timer') {
+    const activeTab = await chrome.tabs.query({ active: true, currentWindow: true });
 
-        //will error if user is doing split screen, or does not have chrome open at the moment (ie: active tab isnt defined)
-        console.log(activeTab)
-        const url = (new URL(activeTab[0].url)).hostname;
-        // a time limit in minutes for when the popup should occur
-        const limit = 1;
+    //will error if user is doing split screen, or does not have chrome open at the moment (ie: active tab isnt defined)
+    console.log(activeTab)
+    const url = (new URL(activeTab[0].url)).hostname;
+    // a time limit in minutes for when the popup should occur
+    const limit = 2;
 
-        // chrome.storage.local.get(["date"]).then((result) => {
-        //   let currDate = new Date(new Date().toDateString());
-        //   if(result != currDate) {
-        //     // clear websiteTimes
-        //     // update
-        //   } else {
-        //     // nothing
-        //   }
-        //   console.log("Value is " + result.key);
-        // });
+    chrome.storage.local.get(["date"]).then(async (result) => {
+      let currDate = new Date(new Date().toDateString());
+      if (result != currDate) {
+        // clear website timings from previous days
+        chrome.storage.local.set({ "websiteTimes": {} });
+        // update stored date
+        await chrome.storage.local.set({ "date": currDate });
+      }
+    });
 
-        // // TODO: only time for restricted sites
-        // chrome.storage.local.get(['RESTRICTIONS_REPLACE'], async (result) => {
-        //   if (url in result.RESTRICTIONS) {
+    // Retrieve restricted list from chrome.storage.local
+    let restrictionsRes = await chrome.storage.local.get(['restrictedList']);
+    let restrictedList = restrictionsRes.restrictedList;
 
-        //get 'websiteTimes' object and run the arrow function on it
-        let result = await chrome.storage.local.get(['websiteTimes']);
-        // assign result.webtimes OR an empty dict if that is not defined
-        let websiteTimes = result.websiteTimes || {};
+    //get 'websiteTimes' object and run the arrow function on it
+    let result = await chrome.storage.local.get(['websiteTimes']);
+    // assign result.webtimes OR an empty dict if that is not defined
+    let websiteTimes = result.websiteTimes || {};
 
-        //instantiate/increment websiteTimes[url] keyval pair
-        if (websiteTimes[url]) {
-            websiteTimes[url] += 1;
-        } else {
-            websiteTimes[url] = 1;
-        }
-        // log time in minutes spent
-        console.log(websiteTimes[url]);
+    let isRestrictedSite = restrictedList.find((site) => site.domain == url);
+
+    if (isRestrictedSite) {
+      //instantiate/increment websiteTimes[url] keyval pair
+      if (websiteTimes[url]) {
+        websiteTimes[url] += 1;
+      } else {
+        websiteTimes[url] = 1;
+      }
+      // log time in minutes spent
+      console.log(websiteTimes[url]);
 
         // Retrieve restricted list from chrome.storage.local
         chrome.storage.local.get(['restrictedList'], async(result) => {
@@ -122,7 +124,10 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
        
 
 
-        //asynchonous call to store "websiteTimes":websiteTimes on local storage (ie:update the WebsiteTimes structure)
-        await chrome.storage.local.set({ websiteTimes });
+      //asynchonous call to store "websiteTimes":websiteTimes on local storage (ie:update the WebsiteTimes structure)
+      await chrome.storage.local.set({ websiteTimes });
     }
+
+
+  }
 });

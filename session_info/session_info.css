@@ -10,7 +10,7 @@ body {
   align-items: center;
   font-size: 13px;
   /* Base font size */
-  width: 300px;
+  width: fit-content;
 }
 
 /* Main container styling */
@@ -43,8 +43,12 @@ tr:hover td {
 
 table {
   width: 90%;
-  margin: 5% 5%;
+  margin: 5% 0%;
   text-align: left;
+}
+
+td {
+  padding: 0 15px;
 }
 
 body {
