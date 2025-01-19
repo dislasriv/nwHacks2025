@@ -1,20 +1,25 @@
 {
-    "name":"AccountabilityBuddy (or something)",
-    "description":"A simple extension to save you from yourself.",
-
+    "name": "AccountabilityBuddy (or something)",
+    "description": "A simple extension to save you from yourself.",
     "version": "0.1.0",
     "manifest_version": 3,
-
     "action": {
-      "default_popup": "session_info/session_info.html",
-      "default_icon": "settings/timer.png"
+        "default_popup": "settings/settings.html",
+        "default_icon": "settings/timer.png"
     },
-
-    "background":{
+    "background": {
         "service_worker": "background.js"
     },
-
-    "permissions":["notifications", "alarms", "storage", "tabs"]
-
-
+    "permissions": [
+        "notifications",
+        "alarms",
+        "storage",
+        "tabs"
+    ],
+    "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["settings/settings.js"]
+    }
+  ]
 }
