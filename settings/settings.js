@@ -30,11 +30,25 @@ function renderTable() {
     });
 }
 
+// Unban a website
+function unbanWebsite(event) {
+    let row = event.target.parentNode;
+    let url = row.children[1].innerText;
+    restrictedList = restrictedList.filter(({ domain, time }) => domain != url)
+    chrome.storage.local.set({ restrictedList })
+    row.parentNode.removeChild(row);
+}
+
 // Add a row entry to the table
 function AddRowToTable(domain, time) {
     const tbody = document.querySelector("#domain-list tbody");
 
     const row = document.createElement("tr");
+
+    // Delete button
+    const deleteButton = document.createElement("td")
+    deleteButton.innerText = "x"
+    deleteButton.addEventListener('click', unbanWebsite)
 
     // Create the domain name column
     const domainCell = document.createElement("td");
@@ -45,6 +59,7 @@ function AddRowToTable(domain, time) {
     timeCell.textContent = `${time} minutes`;
 
     // Append cells to the row
+    row.appendChild(deleteButton)
     row.appendChild(domainCell);
     row.appendChild(timeCell);
 
