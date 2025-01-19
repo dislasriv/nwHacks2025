@@ -59,6 +59,8 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
           // if (websiteTimes[url] > limit) { // TODO: change back to =
             chrome.action.setPopup({ popup: "warning/warning.html" });
             chrome.action.openPopup();
+            chrome.action.setPopup({ popup: "popup/session_info.html" });
+
           // }
 
           //asynchonous call to store "websiteTimes":websiteTimes on local storage (ie:update the WebsiteTimes structure)
