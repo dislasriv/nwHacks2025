@@ -1,3 +1,4 @@
+const SNOOZE_INTERVAL = 1; // TODO: Change back to 15;
 
 console.log("hello i am functioning and normal c:");
 
@@ -24,7 +25,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
     //will error if user is doing split screen, or does not have chrome open at the moment (ie: active tab isnt defined)
     const url = domainRegex.exec(activeTab[0].url);
     // a time limit in minutes for when the popup should occur
-    const limit = 2;
+    const limit = 1; // TODO: get from restrictions in storage
 
     // chrome.storage.local.get(["date"]).then((result) => {
     //   let currDate = new Date(new Date().toDateString());
@@ -56,12 +57,17 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
           console.log(websiteTimes[url]);
 
           //at limit make popup
-          // if (websiteTimes[url] > limit) { // TODO: change back to =
+          let snoozetime;
+          if(websiteTimes[url] > limit) {
+            snoozeTime = websiteTimes[url] - limit;
+          }
+          if (websiteTimes[url] = limit || (false)) { // TODO: change back to =
             chrome.action.setPopup({ popup: "warning/warning.html" });
             chrome.action.openPopup();
             chrome.action.setPopup({ popup: "popup/session_info.html" });
 
-          // }
+
+          }
 
           //asynchonous call to store "websiteTimes":websiteTimes on local storage (ie:update the WebsiteTimes structure)
           await chrome.storage.local.set({ websiteTimes });
